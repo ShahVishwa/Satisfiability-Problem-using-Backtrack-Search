@@ -17,7 +17,7 @@ import java.util.Random;
 public class Literals {
     private Variable v;
     private int noOfLiterals;
-    private HashMap<Integer, Boolean> map;
+    private HashMap<Integer, Integer> map;
     private Clause c;
     
     
@@ -54,12 +54,12 @@ public class Literals {
 //        return map;
 //    }
     
-    public HashMap<Integer, Boolean> mapping(Variable v){
-        map = new HashMap<Integer, Boolean>();
+    public HashMap<Integer, Integer> mapping(Variable v){
+        map = new HashMap<Integer, Integer>();
 //        Random rand = new Random();
         int[] variables = v.getVariables();
         for(int i = 0; i <v.getNoOfVariables(); i++){
-            map.put(variables[i], true);
+            map.put(variables[i], -1);
         }
         return map;
     }

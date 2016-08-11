@@ -22,9 +22,10 @@ public class Predicate {
     private List<List<Integer>> clauses;
     Variable v = new Variable(40);
     int[] variable= v.generateVariables();
-    HashMap<Integer, Boolean> initialMap = v.mapping();
+    HashMap<Integer, ArrayList<Integer>> initialMap = v.mapping();
     Literals l = new Literals(v);
-    HashMap<Integer, Boolean> map = l.mapping(v);
+    HashMap<Integer, Integer> map = l.mapping(v);
+    HashMap<Integer, Integer> last = new HashMap<Integer, Integer>();
     private int nodes;
     
     public Predicate(){
@@ -67,31 +68,82 @@ public class Predicate {
         return solveFunctionUtil(map, initialMap, p.getNoOfClauses(), 1, clauses, v.getNoOfVariables());
     }
     
-    public boolean getValue(int value, int noOfVariables, HashMap<Integer, Boolean> map){
+    public boolean getReverse(int value, HashMap<Integer, Integer> map){
+        if(value == -1){
+            return true;
+        }
+        int i = map.get(value);
+        if(i == 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean getValue(int value, int noOfVariables, HashMap<Integer, Integer> map){
         if(value > 2 * noOfVariables){
             return true;
         }
         else if(value > noOfVariables && value <= 2 * noOfVariables){
                 value = value - noOfVariables;
-                return !map.get(value);
+                return getReverse(value, map);
         } 
-        return map.get(value);
+        else {
+            int j = map.get(value);
+            if(j == 0){
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
     
-    public boolean solveFunctionUtil(HashMap<Integer, Boolean> map, HashMap<Integer, Boolean> initialMap, int noOfClauses, int present, List<List<Integer>> clauses, int noOfVariables){
+//    public boolean solveFunctionUtil(HashMap<Integer, Boolean> map, HashMap<Integer, Boolean> initialMap, int noOfClauses, int present, List<List<Integer>> clauses, int noOfVariables){
+//        if(present == noOfVariables+1){
+//            return true;
+//        }
+//        int i;
+//        for(i = 0; i < initialMap.size(); i++){
+//            map.put(present, initialMap.get(i));
+//            boolean foundSafe = true;
+//            List<Integer> clause = new ArrayList<Integer>();
+//            for(int j = 0; j < noOfClauses; j++){
+//                clause = clauses.get(j);
+//                if(!(getValue(clause.get(0), noOfVariables, map) || getValue(clause.get(1), noOfVariables, map) || getValue(clause.get(2), noOfVariables, map))){                 
+//                    nodes++;
+//                    if(i == 1){
+//                        foundSafe = true;
+//                        break;
+//                    }
+//                    foundSafe = false;
+//                    break;
+//                } 
+//            }
+//            if(foundSafe){
+//                present++;
+//                if(solveFunctionUtil(map, initialMap, noOfClauses, present, clauses, noOfVariables)){
+//                    return true;
+//                }
+//            }
+//        }  
+//        return false;
+//    }
+    
+    public boolean solveFunctionUtil(HashMap<Integer, Integer> map, HashMap<Integer, ArrayList<Integer>> initialMap, int noOfClauses, int present, List<List<Integer>> clauses, int noOfVariables){
         if(present == noOfVariables+1){
             return true;
         }
         int i;
-        for(i = 0; i < initialMap.size(); i++){
-            map.put(present, initialMap.get(i));
+        ArrayList<Integer> list = initialMap.get(present);
+        for(i = 0; i < list.size(); i++){
+            map.put(present, list.get(i));
             boolean foundSafe = true;
             List<Integer> clause = new ArrayList<Integer>();
             for(int j = 0; j < noOfClauses; j++){
                 clause = clauses.get(j);
                 if(!(getValue(clause.get(0), noOfVariables, map) || getValue(clause.get(1), noOfVariables, map) || getValue(clause.get(2), noOfVariables, map))){                 
                     nodes++;
-                    if(i == 1){
+                    if(list.get(i) == 1){
                         foundSafe = true;
                         break;
                     }
@@ -100,7 +152,7 @@ public class Predicate {
                 } 
             }
             if(foundSafe){
-                present += 1;
+                present++;
                 if(solveFunctionUtil(map, initialMap, noOfClauses, present, clauses, noOfVariables)){
                     return true;
                 }
@@ -109,7 +161,7 @@ public class Predicate {
         return false;
     }
     
-    public void print(HashMap<Integer, Boolean> map){
+    public void print(HashMap<Integer, Integer> map){
         Iterator it = map.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry x = (Map.Entry)it.next();
