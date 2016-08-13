@@ -3,36 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practice;
+package project;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.LinkedHashMap;
 
 /**
  *
  * @author Vishwa
  */
 public class Literals {
-    private Variable v;
+    private Variables v;
     private int noOfLiterals;
-    private HashMap<Integer, Integer> map;
+    private LinkedHashMap<Integer, Integer> map;
     private Clause c;
     
     
     public Literals(){
+        this.map = new LinkedHashMap<Integer, Integer>();
     }
     
-    public Literals(Variable v){
+    public Literals(Variables v){
         this.noOfLiterals = 2 * (v.getNoOfVariables());
+        this.map = new LinkedHashMap<Integer, Integer>();
     }
 
-    public Variable getV() {
+    public Variables getV() {
         return v;
     }
 
-    public void setV(Variable v) {
+    public void setV(Variables v) {
         this.v = v;
     }
 
@@ -54,15 +54,12 @@ public class Literals {
 //        return map;
 //    }
     
-    public HashMap<Integer, Integer> mapping(Variable v){
-        map = new HashMap<Integer, Integer>();
+    public LinkedHashMap<Integer, Integer> mapping(Variables v){
 //        Random rand = new Random();
         int[] variables = v.getVariables();
-        for(int i = 0; i <v.getNoOfVariables(); i++){
+        for(int i = 0; i < v.getNoOfVariables(); i++){
             map.put(variables[i], -1);
         }
         return map;
     }
-    
-    
 }

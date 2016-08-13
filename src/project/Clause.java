@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practice;
+package project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,23 +29,29 @@ public class Clause {
         this.clause = clause;
     }
     
-//    public List<Integer> generateClause(){
-//        Random rand = new Random();
-//        clause = new ArrayList<Integer>();
-//        for(int i = 0; i <literals; i++){
-//            int value = rand.nextInt(20) + 1;
-//            clause.add(value);
-//        }
-//        return clause;
-//    }
-    
     public List<Integer> generateClause(int noOfVariables){
         Random rand = new Random();
         for(int i = 0; i <literals; i++){
             int value = rand.nextInt(2 * noOfVariables) + 1;
             clause.add(value);
         }
+//        List<List<Integer>> clauses = new ArrayList<List<Integer>>();
+//        clause.add(1);
+//        clause.add(2);
+//        clause.add(9);
+//        clauses.add(clause);
+//        clause.add(1);
+//        clause.add(3);
+//        clause.add(4);
+//        clauses.add(clause);
+//        clause.add(11);
+//        clause.add(8);
+//        clause.add(6);
+//        clauses.add(clause);
+//        clause.add(11);
+//        clause.add(3);
+//        clause.add(12);
+//        clauses.add(clause);
         return clause;
     }
-    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practice;
+package project;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,15 +12,18 @@ import java.util.HashMap;
  *
  * @author Vishwa
  */
-public class Variable {
+public class Variables {
     private int noOfVariables;
     private int[] variables;
-    private HashMap<Integer, ArrayList<Integer>> initialMap;
+//    private String STATUS;
+    private HashMap<Integer, Integer> initialMap;
+    private HashMap<Integer, String> statusMap;
     
-    public Variable(int size){
+    public Variables(int size){
         this.noOfVariables = size;
         variables = new int[size];
-        this.initialMap = new HashMap<Integer, ArrayList<Integer>>();
+        this.initialMap = new HashMap<>();
+        this.statusMap = new HashMap<>();
     }
 
     public int getNoOfVariables() {
@@ -31,6 +34,14 @@ public class Variable {
         this.noOfVariables = noOfVariables;
     }
 
+//    public String getSTATUS() {
+//        return STATUS;
+//    }
+//
+//    public void setSTATUS(String STATUS) {
+//        this.STATUS = STATUS;
+//    }
+
     public int[] getVariables() {
         return variables;
     }
@@ -39,11 +50,11 @@ public class Variable {
         this.variables = variables;
     }
 
-    public HashMap<Integer, ArrayList<Integer>> getInitialMap() {
+    public HashMap<Integer, Integer> getInitialMap() {
         return initialMap;
     }
 
-    public void setInitialMap(HashMap<Integer, ArrayList<Integer>> initialMap) {
+    public void setInitialMap(HashMap<Integer, Integer> initialMap) {
         this.initialMap = initialMap;
     }
     
@@ -74,11 +85,21 @@ public class Variable {
         return list;
     }
     
-    public HashMap<Integer, ArrayList<Integer>> mapping(){
-        for(int i = 0; i < noOfVariables; i++){
-            initialMap.put(i+1, getArrayList(i+1));
+    public HashMap<Integer, String> initialStatus(int noOfVariables){
+        for(int i = 0; i < 2 * noOfVariables; i++){
+            statusMap.put(i+1, "UNKNOWN");
         }
+        return statusMap;
+    }
+    
+    public HashMap<Integer, Integer> mapping(){
+//        for(int i = 0; i < noOfVariables; i++){
+//            initialMap.put(i+1, getArrayList(i+1));
+//        }
+        initialMap.put(0, 0);
+        initialMap.put(1, 1);
         return initialMap;
     }
-
+    
+    
 }
