@@ -35,23 +35,6 @@ public class Clause {
             int value = rand.nextInt(2 * noOfVariables) + 1;
             clause.add(value);
         }
-//        List<List<Integer>> clauses = new ArrayList<List<Integer>>();
-//        clause.add(1);
-//        clause.add(2);
-//        clause.add(9);
-//        clauses.add(clause);
-//        clause.add(1);
-//        clause.add(3);
-//        clause.add(4);
-//        clauses.add(clause);
-//        clause.add(11);
-//        clause.add(8);
-//        clause.add(6);
-//        clauses.add(clause);
-//        clause.add(11);
-//        clause.add(3);
-//        clause.add(12);
-//        clauses.add(clause);
         return clause;
     }
 }

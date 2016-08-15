@@ -16,7 +16,6 @@ public class Literals {
     private Variables v;
     private int noOfLiterals;
     private LinkedHashMap<Integer, Integer> map;
-    private Clause c;
     
     
     public Literals(){
@@ -43,19 +42,8 @@ public class Literals {
     public void setNoOfLiterals(int noOfLiterals) {
         this.noOfLiterals = noOfLiterals;
     }
-
-//    public HashMap<Integer, Boolean> mapping(Variable v){
-//        map = new HashMap<Integer, Boolean>();
-//        Random rand = new Random();
-//        int[] variables = v.getVariables();
-//        for(int i = 0; i < v.getNoOfVariables(); i++){
-//            map.put(variables[i], rand.nextBoolean());
-//        }
-//        return map;
-//    }
     
     public LinkedHashMap<Integer, Integer> mapping(Variables v){
-//        Random rand = new Random();
         int[] variables = v.getVariables();
         for(int i = 0; i < v.getNoOfVariables(); i++){
             map.put(variables[i], -1);
